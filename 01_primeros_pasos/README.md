@@ -1,0 +1,1 @@
+dentro de Dockerfile encontrara descripciones 

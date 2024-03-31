@@ -11,9 +11,10 @@ RUN npm install
 # Corremos la aplicación (solo un comando CMD)
 CMD [ "node", "server.js" ]
 
-# corre docker, corre build, -t: para añadir nombre con versión name:tag 
+# Corre docker, corre build, -t: para añadir nombre con versión name:tag,
 # finalmente direccion donde se encuentra el archivo docker
-# docker build -t nodeapp:0.1 .
+# -> docker build -t nodeapp:0.1 .
 
-# docker images
-# docker run -d -p 8080:3000 nodeapp:0.1
+# -> docker images
+# -> docker run -d -p 8080:3000 nodeapp:0.1
+# -> docker ps
