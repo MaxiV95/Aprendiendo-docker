@@ -22,6 +22,7 @@ services:
 
   my-app:
     build: ./  # Especifica la ruta a la carpeta que contiene tu Dockerfile
+    image: my-node-app:0.0.1
     ports:
       - 3000:3000  # Puedes mapear el puerto de tu aplicación como desees
     depends_on:
@@ -31,4 +32,4 @@ volumes: # Define un volumen llamado "mongo-data" para almacenar los datos de Mo
   mongo-data:
     driver: local # Utiliza el controlador de volumen local por defecto
 
-# docker-compose -f docker-compose.yaml up
+# docker-compose -p my-app -f docker-compose.yaml up --detach

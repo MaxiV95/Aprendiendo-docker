@@ -103,4 +103,9 @@ docker build -t my-app:1.0 .
 _El punto "." al final del comando indica la ubicación del Dockerfile._
 
 mas información: https://www.youtube.com/watch?v=6YisG2GcXaw
+
+## Para hacer todo automatizadamente
+
+hay un script.sh con instrucciones
+
 ver quien usa un puerto -> netstat -ano | findstr :27017

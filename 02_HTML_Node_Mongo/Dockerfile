@@ -21,3 +21,12 @@ CMD ["node", "server.js"]
 # -> docker images
 # -> docker run -d -p 3000:3000 --name my-app my-app:0.1
 # -> docker ps
+
+# una mejor practica es pimero copiar el package.json, instalar node y luego copiar el resto de carpetas,
+# mas velocidad en generacion de imagen ya que carga solo nuevos cambios
+# FROM node:18-alpine
+# WORKDIR /app
+# COPY package.json package-lock.json .
+# RUN npm install
+# COPY myapp /app
+# CMD ["node", "server.js"]
