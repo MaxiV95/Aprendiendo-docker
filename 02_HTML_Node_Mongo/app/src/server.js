@@ -4,6 +4,7 @@ let fs = require("fs");
 let MongoClient = require("mongodb").MongoClient;
 let bodyParser = require("body-parser");
 let app = express();
+require('dotenv').config();
 
 app.use(
 	bodyParser.urlencoded({
@@ -18,16 +19,21 @@ app.get("/", function (req, res) {
 });
 
 app.get("/profile-picture", function (req, res) {
+	console.log("buscando picture");
 	let img = fs.readFileSync(path.join(__dirname, "images/profile-1.jpg"));
 	res.writeHead(200, { "Content-Type": "image/jpg" });
 	res.end(img, "binary");
 });
 
 // utilizar 'mongoUrlLocal' al iniciar la aplicación localmente
-let mongoUrlLocal = "mongodb://admin:password@localhost:27017";
+const mongoUrlLocal = "mongodb://admin:password@localhost:27017";
 
 // utilizar 'mongoUrlDocker' al iniciar la aplicación como contenedor acoplable
-let mongoUrlDocker = "mongodb://admin:password@mongodb";
+const mongoUrlDocker = "mongodb://admin:password@mongodb";
+
+const dbHost = process.env.DB_HOST === 'localhost' ? mongoUrlLocal : mongoUrlDocker;
+console.log('DB Host:', dbHost);
+
 
 /* pasa estas opciones a la solicitud de conexión del cliente mongo para evitar una advertencia
  * de desaprobación para el motor de monitoreo y descubrimiento de servidores actual */
@@ -40,7 +46,7 @@ app.post("/update-profile", function (req, res) {
 	let userObj = req.body;
 
 	MongoClient.connect(
-		mongoUrlDocker,
+		dbHost,
 		mongoClientOptions,
 		function (err, client) {
 			if (err) throw err;
@@ -72,7 +78,7 @@ app.get("/get-profile", function (req, res) {
 	// Function to wait for MongoDB to be ready
 	function waitForMongoDB() {
 		MongoClient.connect(
-			mongoUrlDocker,
+			dbHost,
 			mongoClientOptions,
 			function (err, client) {
 				if (err) {

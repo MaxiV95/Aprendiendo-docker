@@ -10,4 +10,5 @@ docker-compose -p my-app -f docker-compose.yaml down
 # docker rmi my-node-app:0.0.1
 
 # Correr un build de Dockerfile
+docker build -t my-node-app:0.0.1 .
 docker-compose -p my-app -f docker-compose.yaml up --detach
